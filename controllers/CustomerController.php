@@ -48,7 +48,10 @@ class CustomerController extends Controller
 
     public function actionAdd()
     {
-        return $this->render('add') ;
+        $customer = new CustomerRecord() ;
+        $phone = new PhoneRecord() ;
+
+        return $this->render('add', compact('customer' , 'phone')) ;
     }
 
 }
