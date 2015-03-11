@@ -7,6 +7,8 @@ use app\models\Customer;
 use app\models\Phone;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
+use yii\helpers\ArrayHelper ;
+
 
 class CustomerController extends Controller
 {
@@ -14,6 +16,7 @@ class CustomerController extends Controller
     {
         $records = $this->findRecordsByQuery() ;
         return $this->render('index', compact('records') ) ;
+//        return $this->render('index', ['records' => $records]) ;
     }
     public function actionQuery()
     {
@@ -36,7 +39,6 @@ class CustomerController extends Controller
             $phone_record->number = $phone->number ;
             $phone_record->customer_id = $customer_record->id ;
             $phone_record->save() ;
-            // 49
         }
     }
 
@@ -47,7 +49,7 @@ class CustomerController extends Controller
 
         $customer = new Customer($name, $birth_date) ;
         $customer->notes = $customer_record->notes ;
-        $customer_phones[] = new Phone($phone_record->number) ;
+        $customer->phones[] = new Phone($phone_record->number) ;
 
         return $customer ;
     }
@@ -77,21 +79,6 @@ class CustomerController extends Controller
     }
 
 
-
-    private function findRecordsByQuery()
-    {
-        $number = \Yii::$app->request->get('phone_number') ;
-        $records = $this->getRecordsByPhoneNumber($number) ;
-        $dataProvider = $this->wrapIntoDataProvider($records) ;
-        return $dataProvider ;
-    }
-    private function wrapIntoDataProvider($data)
-    {
-        return new ArrayDataProvider([
-            'allModels' => $data,
-            'pagination' => false
-        ]) ;
-    }
     private function getRecordsByPhoneNumber($number)
     {
         $phone_record = PhoneRecord::findOne(['number' => $number]) ;
@@ -104,4 +91,24 @@ class CustomerController extends Controller
 
         return $this->makeCustomer($customer_record, $phone_record) ;
     }
+    private function wrapIntoDataProvider($data)
+    {
+//        echo 'asdfwaegbawsegaweg' . '<br>';
+
+        return new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => false
+        ]) ;
+
+//        return ArrayHelper::map($data, 'name', 'birth_date') ;
+    }
+
+    private function findRecordsByQuery()
+    {
+        $number = \Yii::$app->request->get('phone_number') ;
+        $records = $this->getRecordsByPhoneNumber($number) ;
+        $dataProvider = $this->wrapIntoDataProvider($records) ;
+        return $dataProvider ;
+    }
+
 }

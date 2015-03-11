@@ -1,6 +1,9 @@
+index here <br>
 <?php
 
-var_dump($records) ;
+echo '<pre>';
+print_r($records) ;
+echo '</pre>';
 
 echo \yii\widgets\ListView::widget([
     'options' => [
