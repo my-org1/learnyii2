@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\customer ;
+namespace app\models ;
 
 class Phone{
     /** @var string */
