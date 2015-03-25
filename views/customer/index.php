@@ -2,7 +2,7 @@ index here <br>
 <?php
 
 echo '<pre>';
-print_r($records) ;
+//print_r($records) ;
 echo '</pre>';
 
 echo \yii\widgets\ListView::widget([

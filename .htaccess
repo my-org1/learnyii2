@@ -1,16 +1,15 @@
 Options -Indexes
 
 <IfModule mod_rewrite.c>
-  RewriteEngine on
+    RewriteEngine on
 
-  RewriteCond %{REQUEST_URI} !^public
-  RewriteRule ^(.*)$ /learnyii2/web/$1 [L]
+    RewriteCond %{REQUEST_URI} !^public
+    RewriteRule ^(.*)$ /learnyii2/web/$1 [L]
 </IfModule>
 
-
 <Files ~ "(.json|.lock|.git)">
-Order allow,deny
-Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
 
 

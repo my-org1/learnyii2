@@ -15,6 +15,10 @@ class CustomerController extends Controller
     public function actionIndex()
     {
         $records = $this->findRecordsByQuery() ;
+        echo "<pre>" ;
+        print_r($records) ;
+        echo "</pre>" ;
+
         return $this->render('index', compact('records') ) ;
 //        return $this->render('index', ['records' => $records]) ;
     }
@@ -89,7 +93,7 @@ class CustomerController extends Controller
         if(!$customer_record)
             return [] ;
 
-        return $this->makeCustomer($customer_record, $phone_record) ;
+        return [$this->makeCustomer($customer_record, $phone_record)] ;
     }
     private function wrapIntoDataProvider($data)
     {

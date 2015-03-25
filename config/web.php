@@ -44,17 +44,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules'=>[
-                '<controller:\w+>/<id:\d+>/'=>'<controller>/view',
-                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>/'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-                '<controller:\w+>/'=>'<controller>/',
-                '<controller:\w+>'=>'<controller>/',
-
-                '<action:\w+(?<!admin)>/' => 'site/<action>',
-                '<action:\w+(?<!admin)>' => 'site/<action>',
-//                '<action:admin>/' => 'admin/<action>',     #for admin controller yet
-//                '<action:admin>' => 'admin/<action>',     #for admin controller yet
+                '<alias:index|about|contact|mytable|login>' => 'site/<alias>',
             ],
         ],
 
