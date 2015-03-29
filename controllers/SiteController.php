@@ -93,4 +93,9 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionDocs()
+    {
+        return $this->render('docindex.md') ;
+    }
 }

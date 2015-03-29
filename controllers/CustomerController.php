@@ -22,10 +22,6 @@ class CustomerController extends Controller
         return $this->render('index', compact('records') ) ;
 //        return $this->render('index', ['records' => $records]) ;
     }
-    public function actionQuery()
-    {
-        return $this->render('query');
-    }
 
 
     private function store(Customer $customer)
@@ -83,6 +79,14 @@ class CustomerController extends Controller
     }
 
 
+    private function findRecordsByQuery()
+    {
+        $number = \Yii::$app->request->get('phone_number') ;
+        $records = $this->getRecordsByPhoneNumber($number) ;
+        $dataProvider = $this->wrapIntoDataProvider($records) ;
+        return $dataProvider ;
+    }
+
     private function getRecordsByPhoneNumber($number)
     {
         $phone_record = PhoneRecord::findOne(['number' => $number]) ;
@@ -95,6 +99,7 @@ class CustomerController extends Controller
 
         return [$this->makeCustomer($customer_record, $phone_record)] ;
     }
+
     private function wrapIntoDataProvider($data)
     {
 //        echo 'asdfwaegbawsegaweg' . '<br>';
@@ -107,12 +112,11 @@ class CustomerController extends Controller
 //        return ArrayHelper::map($data, 'name', 'birth_date') ;
     }
 
-    private function findRecordsByQuery()
+    public function actionQuery()
     {
-        $number = \Yii::$app->request->get('phone_number') ;
-        $records = $this->getRecordsByPhoneNumber($number) ;
-        $dataProvider = $this->wrapIntoDataProvider($records) ;
-        return $dataProvider ;
+        return $this->render('query');
     }
+
+
 
 }

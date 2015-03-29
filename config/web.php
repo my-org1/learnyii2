@@ -44,9 +44,18 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules'=>[
-                '<alias:index|about|contact|mytable|login>' => 'site/<alias>',
+                '<alias:index|about|contact|mytable|login|docs>' => 'site/<alias>',
             ],
         ],
+
+        'view' => [
+            'renderers' => [
+                'md' => [
+                    'class' => 'app\utilities\MarkdownRenderer'
+                ]
+            ],
+        ],
+
 
     ],
     'params' => $params,
